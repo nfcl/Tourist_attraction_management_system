@@ -143,7 +143,7 @@ namespace Data
 			fgetc(fp);
 			fgetc(fp);
 			tmpinfo.Init();
-			tmpinfo.id = i;
+			tmpinfo.id = i + 1;
 			sprintf_s(tmpinfo.LineInfo, "%04d", i + 1);
 
 			fgets(tmpinfo.Name, 100, fp);

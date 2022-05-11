@@ -22,9 +22,9 @@ namespace Vip
 		printf("\033(0x     x 酒店信息查看x                                                                                                x  \n");//9
 		printf("\033(0x     mqqqqqqqqqqqqqj                                                                                                x  \n");//0 1
 		printf("\033(0x                                                                                                                    x  \n");//1
-		printf("\033(0x                                                                                                                    x  \n");//2
-		printf("\033(0x                                                                                                                    x  \n");//3
-		printf("\033(0x                                                                                                                    x  \n");//4
+		printf("\033(0x     lqqqqqqqqqqqqqk                                                                                                x  \n");//2
+		printf("\033(0x     x 公交信息查看x                                                                                                x  \n");//3
+		printf("\033(0x     mqqqqqqqqqqqqqj                                                                                                x  \n");//4
 		printf("\033(0x                                                                                                                    x  \n");//5
 		printf("\033(0x                                                                                                                    x  \n");//6
 		printf("\033(0x                                                                                                                    x  \n");//7
@@ -58,6 +58,11 @@ namespace Vip
 		Hotel::Main();
 	}
 
+	void PressTransitCheck(Button Sender)
+	{
+		Transit::Main();
+	}
+
 	void LoginOut(Button Sender)
 	{
 		CharinfoNow.Init();
@@ -73,12 +78,13 @@ namespace Vip
 		Refresh();
 		Sleep(100);
 
-		int ButtonNum = 4;
-		Button Buttons[4]{};
+		int ButtonNum = 5;
+		Button Buttons[5]{};
 		Buttons[0].NewButton(0, 0, 7, 3, LoginOut, 0, 0, 8);					//注销按钮
 		Buttons[1].NewButton(111, 0, 7, 3, Exit, 111, 0, 8);					//退出按钮
 		Buttons[2].NewButton(6, 4, 15, 3, PressAttractionInfoCheck, 6, 4, 16);	//景点信息查看按钮
 		Buttons[3].NewButton(6, 8, 15, 3, PressHotleInfoCheck, 6, 8, 16);		//酒店信息查看按钮
+		Buttons[4].NewButton(6, 12, 15, 3, PressTransitCheck, 6, 12, 16);		//景点公交信息查看按钮
 
 		INPUT_RECORD Mouse;
 		int x, y;
@@ -112,6 +118,7 @@ namespace Vip
 								}
 								case 2://景点信息查看按钮
 								case 3://酒店信息查看按钮
+								case 4://景点公交信息查看按钮
 								{
 									Buttons[i].Click(Buttons[i]);
 									break;

@@ -60,7 +60,7 @@ namespace Visitor
 
 	void PressTransitCheck(Button Sender)
 	{
-		//Transit::Main();
+		Transit::Main();
 	}
 
 	void LoginOut(Button Sender)

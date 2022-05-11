@@ -233,7 +233,6 @@ namespace Registe
 		exit(0);
 	}
 
-
 	void Tips(TipType type, bool opacity)
 	{
 		setlocale(LC_ALL, "C");

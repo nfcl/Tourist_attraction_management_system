@@ -440,6 +440,7 @@ extern Vector Transits;					//全部公交信息
 #include "Visitor.h"
 #include "Attraction.h"
 #include "Hotel.h"
+#include "Transit.h"
 
 //——————————————
 //*要按顺序编译不然会出大问题*

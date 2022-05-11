@@ -99,4 +99,9 @@
     <Text Include="HotelInfo.txt" />
     <Text Include="Transit.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
 </Project>

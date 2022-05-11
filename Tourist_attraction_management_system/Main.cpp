@@ -60,6 +60,9 @@ namespace Main
 		char HotelInfoPath[] = "HotelInfo.txt";
 		Hotels = Data::ReadHotelInfo(HotelInfoPath);					//酒店信息读取
 
+		char TransitInfoPath[] = "Transit.txt";
+		Transits = Data::ReadTransitInfo(TransitInfoPath);				//公交信息读取
+
 		CharinfoNow.Init();												//登录人员信息初始化
 	}
 
