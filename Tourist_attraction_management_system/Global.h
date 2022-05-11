@@ -464,7 +464,7 @@ extern Vector Transits;					//全部公交信息
 // 
 //0x71	  q	         ─
 // 
-//0x74	  T	         ├
+//0x74	  t	         ├
 // 
 //0x75	  u	         ┤
 // 

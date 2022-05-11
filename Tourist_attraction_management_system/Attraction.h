@@ -6,5 +6,10 @@ namespace Attraction
 	void Main();
 }
 
+namespace _attraction_
+{
+	void Main();
+}
+
 #endif // !_ATTRACTION_h
 

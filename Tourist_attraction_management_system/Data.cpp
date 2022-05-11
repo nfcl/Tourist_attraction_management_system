@@ -71,7 +71,38 @@ namespace Data
 			tmpAttraction.SetDescrible(tmpchar, strlen(tmpchar));
 			Result.push_back(&tmpAttraction);
 		}
+		fclose(fp);
 		return Result;
+	}
+
+	void WriteAttraction(Vector AttractionInfos, char* Path)
+	{
+		FILE* fp;
+		fopen_s(&fp, Path, "w");
+		if (fp == 0)return;
+		AttractionInfo tmpinfo;
+		char tmptag[10];
+		char tmpdescrible;
+		fprintf(fp, "%d\n", AttractionInfos.size);
+		for (int i = 0; i < AttractionInfos.size; ++i)
+		{
+			AttractionInfos.get(&tmpinfo, i);
+			fprintf(fp, "%s\n", tmpinfo.name);
+			fprintf(fp, "%d", tmpinfo.Tags.size);
+			for (int j = 0; j < tmpinfo.Tags.size; ++j)
+			{
+				tmpinfo.Tags.get(&tmptag, j);
+				fprintf(fp, " %s", tmptag);
+			}
+			fprintf(fp, "\n%s\n", tmpinfo.Price);
+			for (int j = 0; j < tmpinfo.Describle.size; ++j)
+			{
+				tmpinfo.Describle.get(&tmpdescrible, j);
+				fprintf(fp, "%c", tmpdescrible);
+			}
+			fprintf(fp, "\n");
+		}
+		fclose(fp);
 	}
 
 	Vector ReadHotelInfo(char* Path)
@@ -123,6 +154,7 @@ namespace Data
 			sprintf_s(tmphotel.Datagridline, "%04dx %-39sx %-sÐÇ¼¶  ", i + 1, tmphotel.Name, inttochar[tmphotel.Level]);
 			Hotels.push_back(&tmphotel);
 		}
+		fclose(fp);
 		return Hotels;
 	}
 
@@ -173,6 +205,7 @@ namespace Data
 			}
 			Transits.push_back(&tmpinfo);
 		}
+		fclose(fp);
 		return Transits;
 	}
 }

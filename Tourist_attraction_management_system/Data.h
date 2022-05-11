@@ -26,6 +26,13 @@ namespace Data
 	/// <returns></returns>
 	Vector AttractionsRead(char* Path);
 
+	/// <summary>
+	/// 景点信息写入
+	/// </summary>
+	/// <param name="AttractionInfos"></param>
+	/// <param name="Path"></param>
+	void WriteAttraction(Vector AttractionInfos, char* Path);
+
 	Vector ReadHotelInfo(char* Path);
 
 	Vector ReadTransitInfo(char* Path);

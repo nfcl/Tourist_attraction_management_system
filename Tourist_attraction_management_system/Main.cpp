@@ -52,7 +52,7 @@ namespace Main
 		printf("\033[0m");												//清除转义序列属性
 
 		char CharinfoPath[] = "Charinfos.txt";							//人物信息读取
-		Charinfos =Data::CharinfoRead(CharinfoPath);
+		Charinfos = Data::CharinfoRead(CharinfoPath);
 
 		char AttractionInfoPath[] = "Attractionsinfo.txt";				//景点信息读取
 		Attractions = Data::AttractionsRead(AttractionInfoPath);
