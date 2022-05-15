@@ -67,15 +67,8 @@ namespace SingleAttraction
 		}
 		//景点类型
 		{
-			char tmptag[10];
 			Tools::ConsoleCursorGotoXY(18, 7);
-			Tools::SetBackGround(Colors::LightGray);
-			for (int i = 0; i < AttractionNow.Tags.size; ++i)
-			{
-				AttractionNow.Tags.get(&tmptag, i);
-				printf("\033(B%s\033[3C", tmptag);
-			}
-			Tools::SetBackGround(Colors::White);
+			printf("\033(B%s", AttractionNow.Tags);
 		}
 		//景点票价
 		{
@@ -363,7 +356,308 @@ namespace Attraction
 
 namespace _singleattraction_
 {
+	AttractionInfo AttractionNow;
 
+	void ShowSingle();
+	void ShowDescrible();
+
+	void Refresh()
+	{
+		system("cls");
+		Tools::HideCursor(false);
+		Tools::ConsoleCursorGotoXY(0, 0);
+		Tools::SetBothGround(Colors::Black, Colors::White);
+		//			  0         1         2         3         4         5         6         7         8         9         0         1       
+		//			  0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567
+		printf("\033(0lqqqqqwqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqwqqqqqk\n");//0 0
+		printf("\033(0x 返回x                                                景点信息                                                x 退出x\n");//1
+		printf("\033(0tqqqqqvqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqvqqqqqu\n");//2
+		printf("\033(0x               lqqqqqk             lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk     x\n");//3
+		printf("\033(0x     景点编号：x     x   景点名称：x                                                                          x     x\n");//4
+		printf("\033(0x               mqqqqqj             mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj     x\n");//5
+		printf("\033(0x               lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk     x\n");//6
+		printf("\033(0x     景点类型：x                                                                                              x     x\n");//7
+		printf("\033(0x               mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj     x\n");//8
+		printf("\033(0x               lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk     x\n");//9
+		printf("\033(0x     门票价格：x                                                                                              x     x\n");//0 1
+		printf("\033(0x               mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj     x\n");//1
+		printf("\033(0x               lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk     x\n");//2
+		printf("\033(0x     详细信息：x                                                                                            ↑x     x\n");//3
+		printf("\033(0x               x                                                                                            x x     x\n");//4
+		printf("\033(0x               x                                                                                            x x     x\n");//5
+		printf("\033(0x               x                                                                                            x x     x\n");//6
+		printf("\033(0x               x                                                                                            x x     x\n");//7
+		printf("\033(0x               x                                                                                            x x     x\n");//8
+		printf("\033(0x               x                                                                                            x x     x\n");//9
+		printf("\033(0x               x                                                                                            x x     x\n");//0 2
+		printf("\033(0x               x                                                                                            x x     x\n");//1
+		printf("\033(0x               x                                                                                            x x     x\n");//2
+		printf("\033(0x               x                                                                                            x x     x\n");//3
+		printf("\033(0x               x                                                                                            x x     x\n");//4
+		printf("\033(0x               x                                                                                            x x     x\n");//5
+		printf("\033(0x               x                                                                                            x x     x\n");//6
+		printf("\033(0x               x                                                                                            ↓x     x\n");//7
+		printf("\033(0x               mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj     x\n");//8
+		printf("\033(0x                                         lqqqqqqqqqqk          lqqqqqqqqqqk                                         x\n");//9
+		printf("\033(0x                                         x   保 存  x          x   重 置  x                                         x\n");//0 3
+		printf("\033(0x                                         mqqqqqqqqqqj          mqqqqqqqqqqj                                         x\n");//1
+		printf("\033(0mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj\n");//2
+		Tools::ConsoleCursorGotoXY(0, 0);
+	}
+
+	void ChangeName(Button Sender)
+	{
+		wchar_t buffer[37] = { '\0' };
+		Vector Vbuffer;
+		Vbuffer.newvector(sizeof(wchar_t));
+		Tools::Char2Wchar(buffer, AttractionNow.name);
+		for (int i = 0; i < lstrlenW(buffer); ++i)
+		{
+			Vbuffer.push_back(&buffer[i]);
+		}
+
+		Tools::HideCursor(true);
+		Tools::ConsoleCursorGotoXY(38, 4);
+		Tools::Enter(Vbuffer, 36, 0x1111);
+		Tools::HideCursor(false);
+		setlocale(LC_ALL, "C");
+
+		for (int i = 0; i < Vbuffer.size; ++i)
+		{
+			Vbuffer.get(&buffer[i], i);
+		}
+		buffer[Vbuffer.size] = '\0';
+		Tools::Wchar2Char(AttractionNow.name, buffer);
+	}
+
+	void ChangeTags(Button Sender) 
+	{
+		wchar_t buffer[47] = { '\0' };
+		Vector Vbuffer;
+		Vbuffer.newvector(sizeof(wchar_t));
+		Tools::Char2Wchar(buffer, AttractionNow.Tags);
+		for (int i = 0; i < lstrlenW(buffer); ++i)
+		{
+			Vbuffer.push_back(&buffer[i]);
+		}
+
+		Tools::HideCursor(true);
+		Tools::ConsoleCursorGotoXY(18, 7);
+		Tools::Enter(Vbuffer, 36, 0x1111);
+		Tools::HideCursor(false);
+		setlocale(LC_ALL, "C");
+
+		for (int i = 0; i < Vbuffer.size; ++i)
+		{
+			Vbuffer.get(&buffer[i], i);
+		}
+		buffer[Vbuffer.size] = '\0';
+		Tools::Wchar2Char(AttractionNow.Tags, buffer);
+	}
+
+	void ChangePrice(Button Sender)
+	{
+		wchar_t buffer[47] = { '\0' };
+		Vector Vbuffer;
+		Vbuffer.newvector(sizeof(wchar_t));
+		Tools::Char2Wchar(buffer, AttractionNow.Price);
+		for (int i = 0; i < lstrlenW(buffer); ++i)
+		{
+			Vbuffer.push_back(&buffer[i]);
+		}
+
+		Tools::HideCursor(true);
+		Tools::ConsoleCursorGotoXY(18, 10);
+		Tools::Enter(Vbuffer, 46, 0x1111);
+		Tools::HideCursor(false);
+		setlocale(LC_ALL, "C");
+
+		for (int i = 0; i < Vbuffer.size; ++i)
+		{
+			Vbuffer.get(&buffer[i], i);
+		}
+		buffer[Vbuffer.size] = '\0';
+		Tools::Wchar2Char(AttractionNow.Price, buffer);
+	}
+
+	void ChangeDescrible(Button Sender)
+	{
+
+	}
+
+	void PressSave(Button Sender)
+	{
+		wchar_t Describle[] = L"是否保存";
+		wchar_t Title[] = L"提示";
+		switch (MessageBox(GetConsoleWindow(), Describle, Title, MB_OKCANCEL))
+		{
+		case IDOK:
+		{
+			Attractions.set(&AttractionNow, (size_t)AttractionNow.id - 1);
+			char path[] = "Attractionsinfo.txt";
+			Data::WriteAttraction(Attractions, path);
+			break;
+		}
+		case IDCANCEL:
+		{
+			return;
+		}
+		}
+	}
+
+	void PressRestart(Button Sender)
+	{
+		wchar_t Describle[] = L"是否重置";
+		wchar_t Title[] = L"提示";
+		switch (MessageBox(GetConsoleWindow(), Describle, Title, MB_OKCANCEL))
+		{
+		case IDOK:
+		{
+			Attractions.get(&AttractionNow, (size_t)AttractionNow.id - 1);
+			ShowSingle();
+			break;
+		}
+		case IDCANCEL:
+		{
+			return;
+		}
+		}
+	}
+
+	void PressBack(Button Sender)
+	{
+
+	}
+
+	void Exit(Button Sender)
+	{
+		exit(0);
+	}
+
+	void Main(AttractionInfo tmpinfo)
+	{
+		AttractionNow = tmpinfo;
+		Refresh();
+		ShowSingle();
+
+		int ButtonNum = 8;
+		Button Buttons[8]{};
+		Buttons[0].NewButton(0, 0, 7, 3, PressBack, 0, 0, 8);						//返回按钮
+		Buttons[1].NewButton(111, 0, 7, 3, Exit, 111, 0, 8);						//退出按钮
+		Buttons[2].NewButton(38, 4, 74, 1, ChangeName, 38, 4, 74);					//更改名称按钮
+		Buttons[3].NewButton(18, 7, 94, 1, ChangeTags, 18, 7, 94);					//更改类型按钮
+		Buttons[4].NewButton(18, 10, 94, 1, ChangePrice, 18, 10, 94);				//更改价格按钮
+		Buttons[5].NewButton(18, 13, 94, 15, ChangeDescrible, 18, 13, 94);			//更改描述按钮
+		Buttons[6].NewButton(42, 29, 13, 3, PressSave, 42, 29, 14);					//保存按钮
+		Buttons[7].NewButton(64, 29, 13, 3, PressRestart, 64, 29, 14);				//重置按钮
+
+		INPUT_RECORD Mouse;
+		int x, y;
+		while (1)
+		{
+			Tools::HideCursor(false);
+			Mouse = Tools::EventInput();
+			if (Mouse.EventType == MOUSE_EVENT)
+			{
+				if (Mouse.Event.MouseEvent.dwButtonState == FROM_LEFT_1ST_BUTTON_PRESSED)
+				{
+					x = Mouse.Event.MouseEvent.dwMousePosition.X;
+					y = Mouse.Event.MouseEvent.dwMousePosition.Y;
+					if (Mouse.Event.MouseEvent.dwEventFlags == DOUBLE_CLICK)			//双击
+					{
+
+					}
+					else																//单击
+					{
+						for (int i = 0; i < ButtonNum; ++i)
+						{
+							if (Buttons[i].Is_Click(x, y))
+							{
+								switch (i)
+								{
+								case 0://返回按钮
+								case 1://退出按钮
+								{
+									Buttons[i].Click(Buttons[i]);
+									return;
+								}
+								case 2://更改名称按钮
+								case 3://更改类型按钮
+								case 4://更改价格按钮
+								case 5://更改描述按钮
+								{
+									Buttons[i].x = x;
+									Buttons[i].y = y;
+									Buttons[i].Click(Buttons[i]);
+									break;
+								}
+								case 6://保存按钮
+								case 7://重置按钮
+								{
+									Buttons[i].Click(Buttons[i]);
+									break;
+								}
+								}
+								break;
+							}
+						}
+					}
+
+				}
+			}
+		}
+	}
+
+	void ShowSingle()
+	{
+		setlocale(LC_ALL, "C");
+
+		Tools::SetBothGround(Colors::DarkGray, Colors::White);
+		//景点编号
+		{
+			Tools::ConsoleCursorGotoXY(18, 4);
+			printf("\033(B%04d", AttractionNow.id);
+		}
+		Tools::SetBothGround(Colors::Black, Colors::White);
+		//景点名称
+		{
+			Tools::ConsoleCursorGotoXY(38, 4);
+			printf("                                                                         ");
+			Tools::ConsoleCursorGotoXY(38, 4);
+			printf("\033(B%s", AttractionNow.name);
+		}
+		//景点类型
+		{
+			Tools::ConsoleCursorGotoXY(18, 7);
+			printf("                                                                                             ");
+			Tools::ConsoleCursorGotoXY(18, 7);
+			printf("\033(B%s", AttractionNow.Tags);
+		}
+		//景点票价
+		{
+			Tools::ConsoleCursorGotoXY(18, 10);
+			printf("                                                                                             ");
+			Tools::ConsoleCursorGotoXY(18, 10);
+			printf("\033(B%s", AttractionNow.Price);
+		}
+		//景点描述
+		{
+			AttractionNow.wrap(92, 15);
+			ShowDescrible();
+		}
+	}
+
+	void ShowDescrible()
+	{
+		char* tmplist = (char*)calloc(92, sizeof(char));
+		Tools::SetBothGround(Colors::Black, Colors::White);
+		for (int i = AttractionNow.DescribleList.BeginLine; i <= AttractionNow.DescribleList.EndLine; ++i)
+		{
+			Tools::ConsoleCursorGotoXY(18, 13 + i - AttractionNow.DescribleList.BeginLine);
+			AttractionNow.DescribleList.Lists.get(tmplist, i);
+			printf("\033(B%s", tmplist);
+		}
+	}
 }
 
 namespace _attraction_
@@ -457,10 +751,10 @@ namespace _attraction_
 			}
 			ShowLineinfo();
 		}
-		else if (Sender.y - 6 + Listinfos.BeginLine < Attractions.size)
+		else if ((size_t)Sender.y - 6 + Listinfos.BeginLine < Attractions.size)
 		{
 			AttractionInfo tmpinfo;
-			Attractions.get(&tmpinfo, Sender.y - 6 + Listinfos.BeginLine);
+			Attractions.get(&tmpinfo, (size_t)Sender.y - 6 + Listinfos.BeginLine);
 			if (tmpinfo.id > 0)
 			{
 				SelectNum += 1;
@@ -485,7 +779,7 @@ namespace _attraction_
 				printf("□");
 			}
 			tmpinfo.id *= -1;
-			Attractions.set(&tmpinfo, Sender.y - 6 + Listinfos.BeginLine);
+			Attractions.set(&tmpinfo, (size_t)Sender.y - 6 + Listinfos.BeginLine);
 		}
 		Sleep(100);
 	}
@@ -531,39 +825,34 @@ namespace _attraction_
 		}
 		}
 	}
-	// MessageBox用法及返回值
-	//HWND hwnd = GetConsoleWindow();
-	//switch (MessageBox(hwnd, L"描述", L"标题", MB_YESNOCANCEL))
-	//{
-	//case IDOK:
-	//{
-	//	break;
-	//}
-	//case IDCANCEL:
-	//{
-	//	break;
-	//}
-	//case IDABORT:
-	//{
-	//	break;
-	//}
-	//case IDRETRY:
-	//{
-	//	break;
-	//}
-	//case IDIGNORE:
-	//{
-	//	break;
-	//}
-	//case IDYES:
-	//{
-	//	break;
-	//}
-	//case IDNO:
-	//{
-	//	break;
-	//}
-	//}
+	//MessageBox(GetConsoleWindow(), L"描述", L"标题", MB_YESNOCANCEL)
+
+	//	按钮参数				含义
+	//	MB_OK					默认值。有一个确认按钮在里面。
+	//	MB_YESNO				有是和否在里面。
+	//	MB_ABORTRETRYIGNORE		有Abort(放弃)，Retry(重试)和Ignore(跳过)
+	//	MB_YESNOCANCEL			消息框含有三个按钮 : Yes，No和Cancel
+	//	MB_RETRYCANCEL			有Retry(重试)和Cancel(取消)
+	//	MB_OKCANCEL				消息框含有两个按钮 : OK和Cancel
+	 
+	//	参数					含义
+	//	MB_ICONEXCLAMATION		一个惊叹号出现在消息框
+	//	MB_ICONWARNING			一个惊叹号出现在消息框
+	//	MB_ICONINFORMATION		一个圆圈中小写字母i组成的图标出现在消息框
+	//	MB_ICONASTERISK			一个圆圈中小写字母i组成的图标出现在消息框
+	//	MB_ICONQUESTION			一个问题标记图标出现在消息框
+	//	MB_ICONSTOP				一个停止消息图标出现在消息框
+	//	MB_ICONERROR			一个停止消息图标出现在消息框
+	//	MB_ICONHAND				一个停止消息图标出现在消息框
+	// 
+	//ID		值		选择了……
+	//IDOK		(1)		OK
+	//IDCANCEL	(2)		CANCEL
+	//IDABORT	(3)		ABORT
+	//IDRETRY	(4)		RETRY
+	//IDIGNORE	(5)		IGNORE
+	//IDYES		(6)		YES
+	//IDNO		(7)		NO
 
 	void PressBack(Button Sender)
 	{
@@ -607,7 +896,13 @@ namespace _attraction_
 					{
 						if (x >= 4 && x <= 114 && y >= 6 && y <= 6 + MaxRowInOnePage - 1)
 						{
-
+							if (y - 6 + Listinfos.BeginLine < Attractions.size)
+							{
+								Attractions.get(&ShowInfo, y - 6 + Listinfos.BeginLine);
+								_singleattraction_::Main(ShowInfo);
+								Refresh();
+								ShowLineinfo();
+							}
 						}
 					}
 					else																//单击
@@ -641,7 +936,32 @@ namespace _attraction_
 							}
 						}
 					}
-
+				}
+				else if (Mouse.Event.MouseEvent.dwEventFlags == MOUSE_WHEELED)
+				{
+					x = Mouse.Event.MouseEvent.dwMousePosition.X;
+					y = Mouse.Event.MouseEvent.dwMousePosition.Y;
+					if (x >= 6 && x <= 112 && y >= 6 && y <= 29)
+					{
+						if ((Mouse.Event.MouseEvent.dwButtonState) >> 24 > 0)//滚轮向用户方向滚
+						{
+							if (Listinfos.EndLine + 1 < (int)Attractions.size)
+							{
+								Listinfos.BeginLine += 1;
+								Listinfos.EndLine += 1;
+								ShowLineinfo();
+							}
+						}
+						else												 //滚轮向远离用户方向滚
+						{
+							if (Listinfos.BeginLine)
+							{
+								Listinfos.BeginLine -= 1;
+								Listinfos.EndLine -= 1;
+								ShowLineinfo();
+							}
+						}
+					}
 				}
 			}
 		}

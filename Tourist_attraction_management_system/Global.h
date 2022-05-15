@@ -355,7 +355,7 @@ struct AttractionInfo
 {
 	int id;					//景点序号
 	char name[50];			//景点名字
-	Vector Tags;			//词条每个元素用char[10]存储注意
+	char Tags[50];			//景点类型
 	char Price[50];			//价格描述
 	Vector Describle;		//景点描述
 	ListGrid DescribleList;	//景点描述换行

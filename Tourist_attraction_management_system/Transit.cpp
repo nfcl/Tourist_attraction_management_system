@@ -124,7 +124,7 @@ namespace SingleTransitinfo
 					{
 						if ((Mouse.Event.MouseEvent.dwButtonState) >> 24 > 0)//滚轮向用户方向滚
 						{
-							if (ListInfos.EndLine + 1 < Transitinfo.Route.size)
+							if (ListInfos.EndLine + 1 < (int)Transitinfo.Route.size)
 							{
 								ListInfos.BeginLine += 1;
 								ListInfos.EndLine += 1;
@@ -151,13 +151,14 @@ namespace SingleTransitinfo
 		Vector Content;
 		Content.newvector(sizeof(char[200]));
 		char tmpchar[200];
-		char tmproute[40];
+		char tmproute[40] = { '\0' };
 		int id;	//tmpchar中的下标
 		const char moveo[] = "\033[1B\033[1D";
 		const char movet[] = "\033[1B\033[2D";
 		for (int i = 0; i < TransitNow.Route.size; ++i)
 		{
 			memset(tmpchar, '\0', 200);
+			memset(tmproute, '\0', 40);
 			strcpy_s(tmpchar, 100, "○\033[1B\033[2D\0");
 			id = strlen(tmpchar);
 			TransitNow.Route.get(&tmproute, i);
@@ -195,7 +196,7 @@ namespace SingleTransitinfo
 			Content.push_back(&tmpchar);
 		}
 		ListInfos.BeginLine = 0;
-		ListInfos.EndLine = min(TransitNow.Route.size - 1, MaxRouteInOnePage - 1);
+		ListInfos.EndLine = min((int)TransitNow.Route.size - 1, MaxRouteInOnePage - 1);
 		ListInfos.Lists = Content;
 	}
 
@@ -344,7 +345,7 @@ namespace Transit
 		{
 			if (Sender.y != 6 && ListInfos.BeginLine + Sender.y - 7 < (int)Transits.size)
 			{
-				Transits.get(&tmpinfo, ListInfos.BeginLine + Sender.y - 7);
+				Transits.get(&tmpinfo, (size_t)ListInfos.BeginLine + Sender.y - 7);
 				if (tmpinfo.id < 0)												//>0为未选
 				{
 					SelectNum -= 1;
@@ -368,7 +369,7 @@ namespace Transit
 				}
 				Tools::SetBothGround(Colors::Black, Colors::White);
 				tmpinfo.id *= -1;
-				Transits.set(&tmpinfo, ListInfos.BeginLine + Sender.y - 7);
+				Transits.set(&tmpinfo, (size_t)ListInfos.BeginLine + Sender.y - 7);
 			}
 		}
 	}
@@ -415,7 +416,7 @@ namespace Transit
 						{
 							if (ListInfos.BeginLine + y - 7 < (int)Transits.size)
 							{
-								Transits.get(&TransitNow, ListInfos.BeginLine + y - 7);
+								Transits.get(&TransitNow, (size_t)ListInfos.BeginLine + y - 7);
 								SingleTransitinfo::Main(TransitNow);
 								Refresh();
 								ListTransitInfo();

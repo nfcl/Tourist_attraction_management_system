@@ -57,13 +57,7 @@ namespace Data
 			tmpAttraction.id = i + 1;
 			fscanf_s(fp, "%s", tmpAttraction.name, 50);
 			fscanf_s(fp, "%d", &tmpint);
-			tmpAttraction.Tags.newvector(sizeof(char[10]));
-			for (int i = 0; i < tmpint; ++i)
-			{
-				char tmpchar[10];
-				fscanf_s(fp, "%s", tmpchar, 10);
-				tmpAttraction.Tags.push_back(&tmpchar);
-			}
+			fscanf_s(fp, "%s", tmpAttraction.Tags, 50);
 			fscanf_s(fp, "%s", tmpAttraction.Price, 50);
 			char tmpchar[200] = { '\0' };
 			fgets(tmpchar, 200, fp);
@@ -81,20 +75,14 @@ namespace Data
 		fopen_s(&fp, Path, "w");
 		if (fp == 0)return;
 		AttractionInfo tmpinfo;
-		char tmptag[10];
 		char tmpdescrible;
-		fprintf(fp, "%d\n", AttractionInfos.size);
+		fprintf(fp, "%zd\n", AttractionInfos.size);
 		for (int i = 0; i < AttractionInfos.size; ++i)
 		{
 			AttractionInfos.get(&tmpinfo, i);
 			fprintf(fp, "%s\n", tmpinfo.name);
-			fprintf(fp, "%d", tmpinfo.Tags.size);
-			for (int j = 0; j < tmpinfo.Tags.size; ++j)
-			{
-				tmpinfo.Tags.get(&tmptag, j);
-				fprintf(fp, " %s", tmptag);
-			}
-			fprintf(fp, "\n%s\n", tmpinfo.Price);
+			fprintf(fp, "%s\n", tmpinfo.Tags);
+			fprintf(fp, "%s\n", tmpinfo.Price);
 			for (int j = 0; j < tmpinfo.Describle.size; ++j)
 			{
 				tmpinfo.Describle.get(&tmpdescrible, j);
