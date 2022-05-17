@@ -896,9 +896,9 @@ namespace _attraction_
 					{
 						if (x >= 4 && x <= 114 && y >= 6 && y <= 6 + MaxRowInOnePage - 1)
 						{
-							if (y - 6 + Listinfos.BeginLine < Attractions.size)
+							if (y - 6 + Listinfos.BeginLine < (int)Attractions.size)
 							{
-								Attractions.get(&ShowInfo, y - 6 + Listinfos.BeginLine);
+								Attractions.get(&ShowInfo, (size_t)y - 6 + Listinfos.BeginLine);
 								_singleattraction_::Main(ShowInfo);
 								Refresh();
 								ShowLineinfo();

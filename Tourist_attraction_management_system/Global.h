@@ -255,7 +255,7 @@ struct ListGrid
 			Lists.push_back(tmpchars);
 		}
 		BeginLine = 0;
-		EndLine = min(MaxRows - 1, Lists.size - 1);
+		EndLine = min(MaxRows - 1,(int)Lists.size - 1);
 	}
 };
 
@@ -312,6 +312,8 @@ struct Charinfo
 		Adminstrator,	//管理员 系统管理者，负责对系统和用户的信息进行一系列操作 
 		NotLogin		//未登录
 	};
+
+	int id;				//序号
 
 	char Name[31];		//名字
 	char Account[31];	//账号
@@ -441,6 +443,7 @@ extern Vector Transits;					//全部公交信息
 #include "Attraction.h"
 #include "Hotel.h"
 #include "Transit.h"
+#include "User.h"
 
 //——————————————
 //*要按顺序编译不然会出大问题*

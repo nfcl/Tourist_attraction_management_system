@@ -149,6 +149,7 @@
     <ClCompile Include="Tools.cpp" />
     <ClCompile Include="Tourist_attraction_management_system.cpp" />
     <ClCompile Include="Transit.cpp" />
+    <ClCompile Include="User.cpp" />
     <ClCompile Include="Vip.cpp" />
     <ClCompile Include="Visitor.cpp" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="Registe.h" />
     <ClInclude Include="Tools.h" />
     <ClInclude Include="Transit.h" />
+    <ClInclude Include="User.h" />
     <ClInclude Include="Vip.h" />
     <ClInclude Include="Visitor.h" />
   </ItemGroup>

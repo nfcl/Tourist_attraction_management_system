@@ -210,7 +210,7 @@ namespace Tools
 				{//×ó
 					if (InsertId)
 					{
-						tmpBuffer.get(&tmp, InsertId - 1);
+						tmpBuffer.get(&tmp, (size_t)InsertId - 1);
 						if (tmp >= 0x4E00 && tmp <= 0x9FA5)
 						{
 							Rid -= 2;
@@ -271,7 +271,7 @@ namespace Tools
 			{//»Ø³µ
 				if (InsertId > 0)
 				{
-					tmpBuffer.get(&tmp, InsertId - 1);
+					tmpBuffer.get(&tmp, (size_t)InsertId - 1);
 					if (tmp >= 0x4E00 && tmp <= 0x9FA5)
 					{
 						printf("\033[2D\033[2P");
@@ -286,7 +286,7 @@ namespace Tools
 						Rid -= 1;
 						Tk(1, Rid, length, true);
 					}
-					tmpBuffer.remove(InsertId - 1);
+					tmpBuffer.remove((size_t)InsertId - 1);
 					InsertId -= 1;
 				}
 			}

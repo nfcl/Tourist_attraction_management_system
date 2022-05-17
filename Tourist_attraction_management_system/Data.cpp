@@ -14,6 +14,7 @@ namespace Data
 		fscanf_s(fp, "%d\n", &CharinfoNum);
 		for (int i = 0; i < CharinfoNum; ++i)
 		{
+			tmpinfo.id = i + 1;
 			fscanf_s(fp, "%s", tmpinfo.Name, 31);
 			fscanf_s(fp, "%s", tmpinfo.Account, 31);
 			fscanf_s(fp, "%s", tmpinfo.Password, 31	);
