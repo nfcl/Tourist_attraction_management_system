@@ -44,22 +44,22 @@ namespace Registe
 		printf("\033(0x                                                                                                                    x  \n");//3
 		printf("\033(0x                                                                                                                    x  \n");//4
 		printf("\033(0x                                                                                                                    x  \n");//5
-		printf("\033(0x                                      l qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk                                      x  \n");//6
+		printf("\033(0x                                      lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk                                      x  \n");//6
 		printf("\033(0x                                      x 姓名x                                x                                      x  \n");//7
-		printf("\033(0x                                      m qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj                                      x  \n");//8
+		printf("\033(0x                                      mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj                                      x  \n");//8
 		printf("\033(0x                                                                                                                    x  \n");//9
-		printf("\033(0x                                      l qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk                                      x  \n");//0 1
+		printf("\033(0x                                      lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk                                      x  \n");//0 1
 		printf("\033(0x                                      x 账号x                                x                                      x  \n");//1
-		printf("\033(0x                                      m qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj                                      x  \n");//2
+		printf("\033(0x                                      mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj                                      x  \n");//2
 		printf("\033(0x                                                                                                                    x  \n");//3
-		printf("\033(0x                                      l qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk                                      x  \n");//4
+		printf("\033(0x                                      lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk                                      x  \n");//4
 		printf("\033(0x                                      x 密码x                                x                                      x  \n");//5
-		printf("\033(0x                                      m qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj                                      x  \n");//6
+		printf("\033(0x                                      mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj                                      x  \n");//6
 		printf("\033(0x                                                                                                                    x  \n");//7
 		printf("\033(0x                                                                                                                    x  \n");//8
-		printf("\033(0x                                           l qqqqqqqqqqqqqqqqqqqqqqqqqqk                                            x  \n");//9
+		printf("\033(0x                                           lqqqqqqqqqqqqqqqqqqqqqqqqqqqk                                            x  \n");//9
 		printf("\033(0x                                           x   ■会员        □管理者  x                                            x  \n");//0 2
-		printf("\033(0x                                           m qqqqqqqqqqqqqqqqqqqqqqqqqqj                                            x  \n");//1
+		printf("\033(0x                                           mqqqqqqqqqqqqqqqqqqqqqqqqqqqj                                            x  \n");//1
 		printf("\033(0x                                                                                                                    x  \n");//2
 		printf("\033(0x                                                                                                                    x  \n");//3
 		printf("\033(0x                                                      l qqqqk                                                       x  \n");//4

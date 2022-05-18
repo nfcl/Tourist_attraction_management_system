@@ -10,9 +10,11 @@ namespace _user_
 	ListGrid Listinfos;
 	int SelectNum = 0;
 	int MaxRowInOnePage = 24;
+	Charinfo ShowInfo;
 
 	void Init();
 	void ShowLineinfo();
+	void ShowSingleInfo();
 
 	void Refresh()
 	{
@@ -26,39 +28,136 @@ namespace _user_
 		printf("\033(0lqqqqqwqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqwqqqqqk\n");//0 0
 		printf("\033(0x 返回x                                              用户信息管理                                              x 退出x\n");//1
 		printf("\033(0tqqqqqvqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqvqqqqqu\n");//2
-		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq   x\n");//3
+		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq                                                             x\n");//3
 		printf("\033(0x    x □x 序号x  人员 x 名称                                                                                        x\n");//4
-		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqwq   x\n");//5
-		printf("\033(0x                                                                                                               x↑  x\n");//6
-		printf("\033(0x                                                                                                               xx   x\n");//7
-		printf("\033(0x                                                                                                               xx   x\n");//8
-		printf("\033(0x                                                                                                               xx   x\n");//9
-		printf("\033(0x                                                                                                               xx   x\n");//0 1
-		printf("\033(0x                                                                                                               xx   x\n");//1
-		printf("\033(0x                                                                                                               xx   x\n");//2
-		printf("\033(0x                                                                                                               xx   x\n");//3
-		printf("\033(0x                                                                                                               xx   x\n");//4
-		printf("\033(0x                                                                                                               xx   x\n");//5
-		printf("\033(0x                                                                                                               xx   x\n");//6
-		printf("\033(0x                                                                                                               xx   x\n");//7
-		printf("\033(0x                                                                                                               xx   x\n");//8
-		printf("\033(0x                                                                                                               xx   x\n");//9
-		printf("\033(0x                                                                                                               xx   x\n");//0 2
-		printf("\033(0x                                                                                                               xx   x\n");//1
-		printf("\033(0x                                                                                                               xx   x\n");//2
-		printf("\033(0x                                                                                                               xx   x\n");//3
-		printf("\033(0x                                                                                                               xx   x\n");//4
-		printf("\033(0x                                                                                                               xx   x\n");//5
-		printf("\033(0x                                                                                                               xx   x\n");//6
-		printf("\033(0x                                                                                                               xx   x\n");//7
-		printf("\033(0x                                                                                                               xx   x\n");//8
-		printf("\033(0x                                                                                                               x↓  x\n");//9
-		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqvq   x\n");//0 3
+		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqwq                                                             x\n");//5
+		printf("\033(0x                                                     x↑            lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk       x\n");//6
+		printf("\033(0x                                                     xx       名称：x                                       x       x\n");//7
+		printf("\033(0x                                                     xx             mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj       x\n");//8
+		printf("\033(0x                                                     xx                                                             x\n");//9
+		printf("\033(0x                                                     xx             lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk       x\n");//0 1
+		printf("\033(0x                                                     xx       账号：x                                       x       x\n");//1
+		printf("\033(0x                                                     xx             mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj       x\n");//2
+		printf("\033(0x                                                     xx                                                             x\n");//3
+		printf("\033(0x                                                     xx             lqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk       x\n");//4
+		printf("\033(0x                                                     xx       密码：x                                       x       x\n");//5
+		printf("\033(0x                                                     xx             mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj       x\n");//6
+		printf("\033(0x                                                     xx                                                             x\n");//7
+		printf("\033(0x                                                     xx                   lqqqqqqqqqqqqqqqqqqqqqqqqqqqk             x\n");//8
+		printf("\033(0x                                                     xx                   x   □会员        □管理者  x             x\n");//9
+		printf("\033(0x                                                     xx                   mqqqqqqqqqqqqqqqqqqqqqqqqqqqj             x\n");//0 2
+		printf("\033(0x                                                     xx                                                             x\n");//1
+		printf("\033(0x                                                     xx                             lqqqqqqqk                       x\n");//2
+		printf("\033(0x                                                     xx                             x  保存 x                       x\n");//3
+		printf("\033(0x                                                     xx                             mqqqqqqqj                       x\n");//4
+		printf("\033(0x                                                     xx                                                             x\n");//8
+		printf("\033(0x                                                     xx                             lqqqqqqqk                       x\n");//5
+		printf("\033(0x                                                     xx                             x  重置 x                       x\n");//6
+		printf("\033(0x                                                     xx                             mqqqqqqqj                       x\n");//7
+		printf("\033(0x                                                     x↓                                                            x\n");//9
+		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqvq                                                             x\n");//0 3
 		printf("\033(0x    x 删除x                                                                                                         x\n");//1
-		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq   x\n");//2
+		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq                                                             x\n");//2
 		printf("\033(0mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj\n");//3
 		Tools::ConsoleCursorGotoXY(0, 0);
 		printf("\033(B");
+	}
+
+	void ChangeName(Button Sender)
+	{
+		Tools::SetBothGround(Colors::Black, Colors::White);
+		wchar_t buffer[16] = { '\0' };
+		Vector Vbuffer;
+		Vbuffer.newvector(sizeof(wchar_t));
+		Tools::Char2Wchar(buffer, ShowInfo.Name);
+		for (int i = 0; i < lstrlenW(buffer); ++i)
+		{
+			Vbuffer.push_back(&buffer[i]);
+		}
+
+		Tools::HideCursor(true);
+		Tools::ConsoleCursorGotoXY(71, 7);
+		Tools::Enter(Vbuffer, 15, 0x1111);
+		Tools::HideCursor(false);
+		setlocale(LC_ALL, "C");
+
+		for (int i = 0; i < Vbuffer.size; ++i)
+		{
+			Vbuffer.get(&buffer[i], i);
+		}
+		buffer[Vbuffer.size] = '\0';
+		Tools::Wchar2Char(ShowInfo.Name, buffer);
+	}
+
+	void ChangeAccount(Button Sender)
+	{
+		Tools::SetBothGround(Colors::Black, Colors::White);
+		wchar_t buffer[16] = { '\0' };
+		Vector Vbuffer;
+		Vbuffer.newvector(sizeof(wchar_t));
+		Tools::Char2Wchar(buffer, ShowInfo.Account);
+		for (int i = 0; i < lstrlenW(buffer); ++i)
+		{
+			Vbuffer.push_back(&buffer[i]);
+		}
+
+		Tools::HideCursor(true);
+		Tools::ConsoleCursorGotoXY(71, 11);
+		Tools::Enter(Vbuffer, 15, 0x0111);
+		Tools::HideCursor(false);
+		setlocale(LC_ALL, "C");
+
+		for (int i = 0; i < Vbuffer.size; ++i)
+		{
+			Vbuffer.get(&buffer[i], i);
+		}
+		buffer[Vbuffer.size] = '\0';
+		Tools::Wchar2Char(ShowInfo.Account, buffer);
+	}
+
+	void ChangePassword(Button Sender)
+	{
+		Tools::SetBothGround(Colors::Black, Colors::White);
+		wchar_t buffer[16] = { '\0' };
+		Vector Vbuffer;
+		Vbuffer.newvector(sizeof(wchar_t));
+		Tools::Char2Wchar(buffer, ShowInfo.Password);
+		for (int i = 0; i < lstrlenW(buffer); ++i)
+		{
+			Vbuffer.push_back(&buffer[i]);
+		}
+
+		Tools::HideCursor(true);
+		Tools::ConsoleCursorGotoXY(71, 15);
+		Tools::Enter(Vbuffer, 15, 0x0111);
+		Tools::HideCursor(false);
+		setlocale(LC_ALL, "C");
+
+		for (int i = 0; i < Vbuffer.size; ++i)
+		{
+			Vbuffer.get(&buffer[i], i);
+		}
+		buffer[Vbuffer.size] = '\0';
+		Tools::Wchar2Char(ShowInfo.Password, buffer);
+	}
+
+	void ChangePeople(Button Sender)
+	{
+		if (Sender.x >= 79 && Sender.x <= 85 && Sender.y >= 19 && Sender.y <= 19)
+		{
+			ShowInfo.People = Charinfo::People::Vip;
+
+		}
+		else if (Sender.x >= 93 && Sender.x <= 101 && Sender.y >= 19 && Sender.y <= 19)
+		{
+			ShowInfo.People = Charinfo::People::Adminstrator;
+		}
+
+		Tools::SetBothGround(Colors::Black, Colors::White);
+		Tools::ConsoleCursorGotoXY(79, 19);
+		printf("%s", ShowInfo.People == Charinfo::People::Vip ? "■" : "□");
+		Tools::ConsoleCursorGotoXY(93, 19);
+		printf("%s", ShowInfo.People == Charinfo::People::Adminstrator ? "■" : "□");
 	}
 
 	void PressSelect(Button Sender)
@@ -199,6 +298,46 @@ namespace _user_
 	//IDYES		(6)		YES
 	//IDNO		(7)		NO
 
+	void PressSave(Button Sender)
+	{
+		wchar_t Describle[] = L"是否保存";
+		wchar_t Title[] = L"警告";
+		switch (MessageBox(GetConsoleWindow(), Describle, Title, MB_OKCANCEL))
+		{
+		case IDOK:
+		{
+			Charinfos.set(&ShowInfo, (size_t)ShowInfo.id - 1);
+			char Path[] = "Charinfos.txt";
+			Data::CharinfoWrite(Charinfos, Path);
+			ShowLineinfo();
+			break;
+		}
+		case IDCANCEL:
+		{
+			break;
+		}
+		}
+	}
+
+	void PressResert(Button Sender)
+	{
+		wchar_t Describle[] = L"是否重置";
+		wchar_t Title[] = L"警告";
+		switch (MessageBox(GetConsoleWindow(), Describle, Title, MB_OKCANCEL))
+		{
+		case IDOK:
+		{
+			Charinfos.get(&ShowInfo, (size_t)ShowInfo.id - 1);
+			ShowSingleInfo();
+			break;
+		}
+		case IDCANCEL:
+		{
+			break;
+		}
+		}
+	}
+
 	void PressBack(Button Sender)
 	{
 
@@ -216,14 +355,19 @@ namespace _user_
 		Refresh();
 		ShowLineinfo();
 
-		AttractionInfo ShowInfo;
 
-		const int ButtonNum = 4;
+		const int ButtonNum = 10;
 		Button Buttons[ButtonNum]{};
 		Buttons[0].NewButton(0, 0, 7, 3, PressBack, 0, 0, 8);						//返回按钮
 		Buttons[1].NewButton(111, 0, 7, 3, Exit, 111, 0, 8);						//退出按钮
 		Buttons[2].NewButton(7, 4, 3, 26, PressSelect, 7, 4, 4);					//选择按钮
 		Buttons[3].NewButton(5, 30, 8, 3, PressDelete, 5, 30, 9);					//删除按钮
+		Buttons[4].NewButton(71, 7, 39, 1, ChangeName, 71, 7, 40);					//名称更改按钮
+		Buttons[5].NewButton(71, 11, 39, 1, ChangeAccount, 71, 11, 40);				//账号更改按钮
+		Buttons[6].NewButton(71, 15, 39, 1, ChangePassword, 71, 15, 40);			//密码更改按钮
+		Buttons[7].NewButton(79, 19, 23, 1, ChangePeople, 79, 19, 24);				//人员更改按钮
+		Buttons[8].NewButton(85, 22, 10, 3, PressSave, 85, 22, 11);					//保存按钮
+		Buttons[9].NewButton(85, 25, 10, 3, PressResert, 85, 25, 11);				//重置按钮
 
 		INPUT_RECORD Mouse;
 		int x, y;
@@ -239,16 +383,14 @@ namespace _user_
 					y = Mouse.Event.MouseEvent.dwMousePosition.Y;
 					if (Mouse.Event.MouseEvent.dwEventFlags == DOUBLE_CLICK)			//双击
 					{
-						/*if (x >= 4 && x <= 114 && y >= 6 && y <= 6 + MaxRowInOnePage - 1)
+						if (x >= 4 && x <= 54 && y >= 6 && y <= 6 + MaxRowInOnePage - 1)
 						{
 							if (y - 6 + Listinfos.BeginLine < (int)Attractions.size)
 							{
-								Attractions.get(&ShowInfo, (size_t)y - 6 + Listinfos.BeginLine);
-								_singleattraction_::Main(ShowInfo);
-								Refresh();
-								ShowLineinfo();
+								Charinfos.get(&ShowInfo, (size_t)y - 6 + Listinfos.BeginLine);
+								ShowSingleInfo();
 							}
-						}*/
+						}
 					}
 					else																//单击
 					{
@@ -265,6 +407,7 @@ namespace _user_
 									return;
 								}
 								case 2://选择按钮
+								case 7://人员更改按钮
 								{
 									Buttons[i].x = x;
 									Buttons[i].y = y;
@@ -272,6 +415,11 @@ namespace _user_
 									break;
 								}
 								case 3://删除按钮
+								case 4://名称更改按钮
+								case 5://账号更改按钮
+								case 6://密码更改按钮
+								case 8://保存按钮
+								case 9://重置按钮
 								{
 									Buttons[i].Click(Buttons[i]);
 									break;
@@ -290,7 +438,7 @@ namespace _user_
 					{
 						if ((Mouse.Event.MouseEvent.dwButtonState) >> 24 > 0)//滚轮向用户方向滚
 						{
-							if (Listinfos.EndLine + 1 < (int)Attractions.size)
+							if (Listinfos.EndLine + 1 < (int)Charinfos.size)
 							{
 								Listinfos.BeginLine += 1;
 								Listinfos.EndLine += 1;
@@ -326,7 +474,37 @@ namespace _user_
 			Charinfos.get(&tmpinfo, i);
 			Tools::ConsoleCursorGotoXY(5, 6 + i - Listinfos.BeginLine);
 			Tools::SetBothGround(Colors::Black, abs(i) % 2 ? Colors::LightGray : Colors::DarkGray);
-			printf("\033(0x %sx %04dx %6sx \033(B%-87.87s", tmpinfo.id > 0 ? "□" : "■", abs(tmpinfo.id), tmpinfo.People == Charinfo::People::Adminstrator ? "管理员" : "会员", tmpinfo.Name);
+			printf("\033(0x %sx %04dx %6sx \033(B%-29.29s", tmpinfo.id > 0 ? "□" : "■", abs(tmpinfo.id), tmpinfo.People == Charinfo::People::Adminstrator ? "管理员" : "会员", tmpinfo.Name);
+		}
+	}
+
+	void ShowSingleInfo()
+	{
+		printf("\033(B");
+		Tools::SetBothGround(Colors::Black, Colors::White);
+		{//名字
+			Tools::ConsoleCursorGotoXY(71, 7);
+			printf("                                      ");
+			Tools::ConsoleCursorGotoXY(71, 7);
+			printf("%s", ShowInfo.Name);
+		}
+		{//账号
+			Tools::ConsoleCursorGotoXY(71, 11);
+			printf("                                      ");
+			Tools::ConsoleCursorGotoXY(71, 11);
+			printf("%s", ShowInfo.Account);
+		}
+		{//密码
+			Tools::ConsoleCursorGotoXY(71, 15);
+			printf("                                      ");
+			Tools::ConsoleCursorGotoXY(71, 15);
+			printf("%s", ShowInfo.Password);
+		}
+		{//人员
+			Tools::ConsoleCursorGotoXY(79, 19);
+			printf("%s", ShowInfo.People == Charinfo::People::Vip ? "■" : "□");
+			Tools::ConsoleCursorGotoXY(93, 19);
+			printf("%s", ShowInfo.People == Charinfo::People::Adminstrator ? "■" : "□");
 		}
 	}
 }
