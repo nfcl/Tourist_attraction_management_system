@@ -28,9 +28,9 @@ namespace Main
 		printf("\033(0x                                                      x ×¢²áx                                                       x  \n");//5
 		printf("\033(0x                                                      m qqqqj                                                       x  \n");//6
 		printf("\033(0x                                                                                                                    x  \n");//7
-		printf("\033(0x                                                    l qqqqqqqqk                                                     x  \n");//8
-		printf("\033(0x                                                    x ÓÎ¿ÍµÇÂ¼x                                                     x  \n");//9
-		printf("\033(0x                                                    m qqqqqqqqj                                                     x  \n");//0 2
+		printf("\033(0x                                                                                                                    x  \n");//8
+		printf("\033(0x                                                                                                                    x  \n");//8
+		printf("\033(0x                                                                                                                    x  \n");//8
 		printf("\033(0x                                                                                                                    x  \n");//1
 		printf("\033(0x                                                                                                                    x  \n");//2
 		printf("\033(0x                                                                                                                    x  \n");//3
@@ -75,7 +75,6 @@ namespace Main
 		switch (CharinfoNow.People)
 		{
 		case Charinfo::People::NotLogin:
-		case Charinfo::People::Visitor:
 		{
 			break;
 		}
@@ -97,11 +96,6 @@ namespace Main
 		Registe::Main();
 	}
 
-	void ToVisitorLogin(Button Sender)
-	{
-		Visitor::Main();
-	}
-
 	void Exit(Button Sender)
 	{
 		exit(0);
@@ -116,7 +110,6 @@ namespace Main
 		Button Buttons[4]{};
 		Buttons[0].NewButton(55, 10, 7, 3, ToLogin, 55, 10, 8);				//µÇÂ¼°´Å¥
 		Buttons[1].NewButton(55, 14, 7, 3, ToRegiste, 55, 14, 8);			//×¢²á°´Å¥
-		Buttons[2].NewButton(53, 18, 11, 3, ToVisitorLogin, 53, 18, 12);	//ÓÎ¿ÍµÇÂ¼°´Å¥
 		Buttons[3].NewButton(111, 0, 7, 3, Exit, 111, 0, 8);				//ÍË³ö°´Å¥
 
 		INPUT_RECORD Mouse;

@@ -14,21 +14,21 @@ namespace Adminstrator
 		printf("\033(0x 注销x                                                 主界面                                                 x 退出x  \n");//1
 		printf("\033(0tqqqqqvqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqvqqqqqu  \n");//2
 		printf("\033(0x                                                                                                                    x  \n");//3
-		printf("\033(0x     lqqqqqqqqqqqqqk                                                                                                x  \n");//4
-		printf("\033(0x     x 景点信息管理x                                                                                                x  \n");//5
-		printf("\033(0x     mqqqqqqqqqqqqqj                                                                                                x  \n");//6
-		printf("\033(0x                                                                                                                    x  \n");//7
-		printf("\033(0x     lqqqqqqqqqqqqqk                                                                                                x  \n");//8
-		printf("\033(0x     x 酒店信息管理x                                                                                                x  \n");//9
-		printf("\033(0x     mqqqqqqqqqqqqqj                                                                                                x  \n");//0 1
-		printf("\033(0x                                                                                                                    x  \n");//1
-		printf("\033(0x     lqqqqqqqqqqqqqk                                                                                                x  \n");//2
-		printf("\033(0x     x 公交信息管理x                                                                                                x  \n");//3
-		printf("\033(0x     mqqqqqqqqqqqqqj                                                                                                x  \n");//4
-		printf("\033(0x                                                                                                                    x  \n");//5
 		printf("\033(0x     lqqqqqqqqqqqqqk                                                                                                x  \n");//6
 		printf("\033(0x     x 用户信息管理x                                                                                                x  \n");//7
 		printf("\033(0x     mqqqqqqqqqqqqqj                                                                                                x  \n");//8
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//9
+		printf("\033(0x                                                                                                                    x  \n");//5
 		printf("\033(0x                                                                                                                    x  \n");//9
 		printf("\033(0x                                                                                                                    x  \n");//0 2
 		printf("\033(0x                                                                                                                    x  \n");//1
@@ -50,7 +50,7 @@ namespace Adminstrator
 
 	void PressAttractionInfoCheck(Button Sender)
 	{
-		_attraction_::Main();
+		//_attraction_::Main();
 	}
 
 	void PressHotleInfoCheck(Button Sender)
@@ -87,10 +87,10 @@ namespace Adminstrator
 		Button Buttons[ButtonNum]{};
 		Buttons[0].NewButton(0, 0, 7, 3, LoginOut, 0, 0, 8);					//注销按钮
 		Buttons[1].NewButton(111, 0, 7, 3, Exit, 111, 0, 8);					//退出按钮
-		Buttons[2].NewButton(6, 4, 15, 3, PressAttractionInfoCheck, 6, 4, 16);	//景点信息查看按钮
+		Buttons[2].NewButton(6, 16, 15, 3, PressAttractionInfoCheck, 6, 16, 16);	//景点信息查看按钮
 		Buttons[3].NewButton(6, 8, 15, 3, PressHotleInfoCheck, 6, 8, 16);		//酒店信息查看按钮
 		Buttons[4].NewButton(6, 12, 15, 3, PressTransitCheck, 6, 12, 16);		//景点公交信息查看按钮
-		Buttons[5].NewButton(6, 16, 15, 3, PressUserInfoCheck, 6, 16, 16);		//用户信息查看按钮
+		Buttons[5].NewButton(6, 4, 15, 3, PressUserInfoCheck, 6, 4, 16);		//用户信息查看按钮
 
 		INPUT_RECORD Mouse;
 		int x, y;

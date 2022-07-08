@@ -151,7 +151,6 @@
     <ClCompile Include="Transit.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="Vip.cpp" />
-    <ClCompile Include="Visitor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adminstrator.h" />
@@ -167,7 +166,6 @@
     <ClInclude Include="Transit.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Vip.h" />
-    <ClInclude Include="Visitor.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Attractionsinfo.txt" />

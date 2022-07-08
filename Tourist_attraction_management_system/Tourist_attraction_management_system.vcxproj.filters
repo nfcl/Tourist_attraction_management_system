@@ -39,9 +39,6 @@
     <ClCompile Include="Vip.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Visitor.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Attraction.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -81,9 +78,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Vip.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Visitor.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Attraction.h">

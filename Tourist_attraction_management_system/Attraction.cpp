@@ -161,6 +161,7 @@ namespace Attraction
 	int PageNow;
 	int MaxPage;
 	int MaxRowInOnePage = 24;
+	Vector FindSource;
 
 	void ShowAttractions();
 
@@ -199,15 +200,49 @@ namespace Attraction
 		printf("\033(0x                                                                                                                    x\n");//4
 		printf("\033(0x                                                                                                                    x\n");//5
 		printf("\033(0x                                                                                                                    x\n");//6
-		printf("\033(0x                                                                                                                    x\n");//7
-		printf("\033(0x                                                                                                                    x\n");//8
-		printf("\033(0x                                                                                                                    x\n");//9
-		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq   x\n");//0 3
-		printf("\033(0x                                      \033(B|\033(0<<       <                  >       >>\033(B|\033(0                                      x\n");//1
-		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq   x\n");//2
+		printf("\033(0x                                                                                                                    x\n");//6
+		printf("\033(0x                                                                                                                    x\n");//6
+		printf("\033(0x                                                                                                                    x\n");//6
+		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq   x\n");//7
+		printf("\033(0x                                      \033(B|\033(0<<       <                  >       >>\033(B|\033(0                                      x\n");//8
+		printf("\033(0x   qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq   x\n");//9
 		printf("\033(0mqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj\n");//3
 		Tools::ConsoleCursorGotoXY(0, 0);
 		printf("\033(B");
+	}
+
+	void EnterFind(Button Sender)
+	{
+		Vector Vbuffer;
+		Vbuffer.newvector(sizeof(wchar_t));
+		Vbuffer = FindSource;
+		Tools::HideCursor(true);
+		Tools::ConsoleCursorGotoXY(2, 31);
+		Tools::Enter(Vbuffer, 30, 0x1111);
+		Tools::HideCursor(false);
+		setlocale(LC_ALL, "C");
+		FindSource = Vbuffer;
+	}
+
+	void PressFind(Button Sender)
+	{
+		wchar_t wfindsource[50];
+		char findsource[100];
+		for (int i = 0; i < FindSource.size ; ++i)
+		{
+			FindSource.get(&wfindsource[i], i);
+			if (wfindsource[i] == '\0')break;
+		}
+		Tools::Wchar2Char(findsource, wfindsource);
+		AttractionInfo tmpinfo;
+		for (int i = 0; i < Attractions.size; ++i)
+		{
+			Attractions.get(&tmpinfo, i);
+			if (strstr(tmpinfo.name, findsource) != NULL)
+			{
+
+			}
+		}
 	}
 
 	void PressBack(Button Sender)
@@ -786,6 +821,11 @@ namespace _attraction_
 
 	void PressDelete(Button Sender)
 	{
+		if (SelectNum == 0)
+		{
+			MessageBox(GetConsoleWindow(), L"当前无选中景点", L"提示", MB_OK); 
+			return;
+		}
 		wchar_t Describle[] = L"是否删除选中的景点信息";
 		wchar_t Title[] = L"警告";
 		switch (MessageBox(GetConsoleWindow(), Describle, Title, MB_OKCANCEL))

@@ -307,7 +307,6 @@ struct Charinfo
 {
 	enum class People
 	{
-		Visitor,		//游客   不需要登录即可进入，但只能获得部分服务
 		Vip,			//会员   注册的用户，需要登录才可以进入，可以享受全部服务
 		Adminstrator,	//管理员 系统管理者，负责对系统和用户的信息进行一系列操作 
 		NotLogin		//未登录
@@ -439,7 +438,6 @@ extern Vector Transits;					//全部公交信息
 #include "Login.h"
 #include "Vip.h"
 #include "Adminstrator.h"
-#include "Visitor.h"
 #include "Attraction.h"
 #include "Hotel.h"
 #include "Transit.h"
